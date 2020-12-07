@@ -12,12 +12,7 @@
             <section class="section">
                 <div class="column is-3">
                     <div class="card">
-                        <div class="card-imag">
-                            <div class="image is4by3">
-                                <!-- Attribute binding -->
-                                <img :src="image" /> <!-- or <img v-bind:src="image" /> -->
-                            </div>
-                        </div>
+                        <card-image :image="image"></card-image>
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-content">
@@ -63,6 +58,19 @@
         </div>
 
         <script>
+            Vue.component("card-image", {
+                props: {
+                    image: String
+                },
+                template: `
+                        <div class="card-imag">
+                            <div class="image is4by3">
+                                <!-- Attribute binding -->
+                                <img :src="image" /> <!-- or <img v-bind:src="image" /> -->
+                            </div>
+                        </div>
+                `
+            })
             var app = new Vue({
                 el: '#app',
                 data: {
