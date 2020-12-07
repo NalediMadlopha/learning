@@ -25,8 +25,12 @@
                                 </div>
                             </div>
 
+                            <hr>
+
+                            <span class="tag" v-for="interest in interests" :keys="interest.id">{{ interest.title }}</span>
+
                             <!-- Attribute binding -->
-                            <a :href="link">Google</a>
+                            <!-- <a :href="link">Google</a> -->
 
                             <!-- Conditional Binding -->
                             <!-- <div class="content" v-if="showDescription">
@@ -61,7 +65,12 @@
                     showDescription: false,
                     counter: 25,
                     image: "https://gist.githubusercontent.com/mbostock/9511ae067889eefa5537eedcbbf87dab/raw/944b6e5fe8dd535d6381b93d88bf4a854dac53d4/mona-lisa.jpg",
-                    link: "https://google.com"
+                    link: "https://google.com",
+                    interests: [
+                        {"id": 1, "title": "Interest 1"},
+                        {"id": 2, "title": "Interest 2"},
+                        {"id": 3, "title": "Interest 3"}
+                    ]
                 }
             })
         </script>
