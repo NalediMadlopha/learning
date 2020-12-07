@@ -12,6 +12,12 @@
             <section class="section">
                 <div class="column is-4">
                     <div class="card">
+                        <div class="card-imag">
+                            <div class="image is4by3">
+                                <!-- Attribute binding -->
+                                <img :src="image" /> <!-- or <img v-bind:src="image" /> -->
+                            </div>
+                        </div>
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-content">
@@ -19,7 +25,11 @@
                                 </div>
                             </div>
 
-                            <div class="content" v-if="showDescription">
+                            <!-- Attribute binding -->
+                            <a :href="link">Google</a>
+
+                            <!-- Conditional Binding -->
+                            <!-- <div class="content" v-if="showDescription">
                                 <p>{{ description }}</p>
                             </div>
                             <div class="content" v-else>
@@ -34,7 +44,7 @@
                             </p>
                             <p v-else>
                                 less than 5
-                            </p>
+                            </p> -->
 
                         </div>
                     </div>
@@ -49,7 +59,9 @@
                     name: "Vue Hero",
                     description:  "This is a description",
                     showDescription: false,
-                    counter: 25
+                    counter: 25,
+                    image: "https://gist.githubusercontent.com/mbostock/9511ae067889eefa5537eedcbbf87dab/raw/944b6e5fe8dd535d6381b93d88bf4a854dac53d4/mona-lisa.jpg",
+                    link: "https://google.com"
                 }
             })
         </script>
