@@ -10,47 +10,76 @@
     <body>
         <div id="app">
             <section class="section">
-                <div class="column is-3">
-                    <div class="card">
-                        <card-image :image="image"></card-image>
-                        <div class="card-content">
-                            <div class="media">
-                                <div class="media-content">
-                                    <p class="title is-4">{{ name }}</p>
+                <div class="field is-grouped">
+                    <div class="column is-3">
+                        <div class="card">
+                            <card-image :image="image"></card-image>
+                            <div class="card-content">
+                                <div class="media">
+                                    <div class="media-content">
+                                        <p class="title is-4">{{ name }}</p>
+                                    </div>
                                 </div>
+                                <div class="content">
+                                    <p>{{ description }}</p>
+                                    <hr> {{ numberOfInterests }} <hr>                    
+
+                                    <div class="tags">
+                                        <span class="tag" v-for="interest in interests">{{ interest }}</span>
+                                    </div>
+                                </div>
+
+                                <!-- Attribute binding -->
+                                <!-- <a :href="link">Google</a> -->
+
+                                <!-- Conditional Binding -->
+                                <!-- <div class="content" v-if="showDescription">
+                                    <p>{{ description }}</p>
+                                </div>
+                                <div class="content" v-else>
+                                    <p>This displays if the description is not displayed</p>
+                                </div>
+
+                                <p v-if="counter > 20">
+                                    counter greater than 20
+                                </p>
+                                <p v-else-if="counter > 5">
+                                    counter greater than 5
+                                </p>
+                                <p v-else>
+                                    less than 5
+                                </p> -->
+
                             </div>
+                        </div>
+                    </div>
 
-                            <hr>
-
-                            <!-- Computed properties -->
-                            {{ numberOfInterests }}
-
-                            <br />
-                    
-
-                            <span class="tag" v-for="interest in interests" :keys="interest.id">{{ interest.title }}</span>
-
-                            <!-- Attribute binding -->
-                            <!-- <a :href="link">Google</a> -->
-
-                            <!-- Conditional Binding -->
-                            <!-- <div class="content" v-if="showDescription">
-                                <p>{{ description }}</p>
+                    <div class="column is-3">
+                        <div class="field">
+                            <div class="control">
+                                <label>Name</label><br>
+                                <input class="input" v-model="name">
                             </div>
-                            <div class="content" v-else>
-                                <p>This displays if the description is not displayed</p>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <label>Description</label><br>
+                                <textarea class="textarea" v-model="description"></textarea>
                             </div>
+                        </div>
 
-                            <p v-if="counter > 20">
-                                counter greater than 20
-                            </p>
-                            <p v-else-if="counter > 5">
-                                counter greater than 5
-                            </p>
-                            <p v-else>
-                                less than 5
-                            </p> -->
+                        <hr>
 
+                        <h3>Add interest</h3>
+
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <input class="input" v-model="interest">
+                            </div>
+                            <div class="control">
+                                <button class="button" @click="addInterest">Add</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -76,19 +105,22 @@
                 data: {
                     name: "Vue Hero",
                     description:  "This is a description",
-                    showDescription: false,
+                    showDescription: true,
                     counter: 25,
-                    image: "https://gist.githubusercontent.com/mbostock/9511ae067889eefa5537eedcbbf87dab/raw/944b6e5fe8dd535d6381b93d88bf4a854dac53d4/mona-lisa.jpg",
+                    image: "https://bulma.io/images/placeholders/1280x960.png",
                     link: "https://google.com",
-                    interests: [
-                        {"id": 1, "title": "Interest 1"},
-                        {"id": 2, "title": "Interest 2"},
-                        {"id": 3, "title": "Interest 3"}
-                    ]
+                    interests: [ "Python", "Vue", "JavaScript"],
+                    interest: null
                 },
                 computed: {
                     numberOfInterests() {
                         return "Number of interests: " + this.interests.length
+                    }
+                },
+                methods: {
+                    addInterest() {
+                        this.interests.push(this.interest)
+                        // this.interest = null
                     }
                 }
                     
