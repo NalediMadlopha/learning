@@ -30,10 +30,10 @@
                                 </div>
 
                                 <!-- Attribute binding -->
-                                <!-- <a :href="link">Google</a> -->
+                                <a :href="link">Google</a>
 
                                 <!-- Conditional Binding -->
-                                <!-- <div class="content" v-if="showDescription">
+                                <div class="content" v-if="showDescription">
                                     <p>{{ description }}</p>
                                 </div>
                                 <div class="content" v-else>
@@ -47,8 +47,8 @@
                                     counter greater than 5
                                 </p>
                                 <p v-else>
-                                    less than 5
-                                </p> -->
+                                    <!-- less than 5 -->
+                                </p>
 
                             </div>
                         </div>
@@ -73,14 +73,8 @@
 
                         <h3>Add interest</h3>
 
-                        <div class="field is-grouped">
-                            <div class="control">
-                                <input class="input" v-model="interest">
-                            </div>
-                            <div class="control">
-                                <button class="button" @click="addInterest">Add</button>
-                            </div>
-                        </div>
+                        <add-interest @change="addInterest"></add-interest>
+                        
                     </div>
                 </div>
             </section>
@@ -92,21 +86,45 @@
                     image: String
                 },
                 template: `
-                        <div class="card-imag">
-                            <div class="image is4by3">
-                                <!-- Attribute binding -->
-                                <img :src="image" /> <!-- or <img v-bind:src="image" /> -->
-                            </div>
+                    <div class="card-imag">
+                        <div class="image is4by3">
+                            <!-- Attribute binding -->
+                            <img :src="image" /> <!-- or <img v-bind:src="image" /> -->
                         </div>
+                    </div>
                 `
             })
+            Vue.component("add-interest", {
+                template: `
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <input class="input" v-model="interest">
+                        </div>
+                        <div class="control">
+                            <button class="button" @click="addInterest">Add</button>
+                        </div>
+                    </div>
+                `,
+                data() {
+                    return { 
+                        interest: null 
+                    }
+                },
+                methods: {
+                    addInterest() {
+                        this.$emit("change", this.interest)
+                        this.interest = null
+                    }
+                }
+            })
+
             var app = new Vue({
                 el: '#app',
                 data: {
                     name: "Vue Hero",
                     description:  "This is a description",
                     showDescription: true,
-                    counter: 25,
+                    counter: 4,
                     image: "https://bulma.io/images/placeholders/1280x960.png",
                     link: "https://google.com",
                     interests: [ "Python", "Vue", "JavaScript"],
@@ -118,9 +136,8 @@
                     }
                 },
                 methods: {
-                    addInterest() {
-                        this.interests.push(this.interest)
-                        // this.interest = null
+                    addInterest(interest) {
+                        this.interests.push(interest)
                     }
                 }
                     
