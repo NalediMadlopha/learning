@@ -10,7 +10,7 @@
     <body>
         <div id="app">
             <section class="section">
-                <div class="column is-4">
+                <div class="column is-3">
                     <div class="card">
                         <div class="card-imag">
                             <div class="image is4by3">
@@ -26,6 +26,12 @@
                             </div>
 
                             <hr>
+
+                            <!-- Computed properties -->
+                            {{ numberOfInterests }}
+
+                            <br />
+                    
 
                             <span class="tag" v-for="interest in interests" :keys="interest.id">{{ interest.title }}</span>
 
@@ -71,7 +77,13 @@
                         {"id": 2, "title": "Interest 2"},
                         {"id": 3, "title": "Interest 3"}
                     ]
+                },
+                computed: {
+                    numberOfInterests() {
+                        return "Number of interests: " + this.interests.length
+                    }
                 }
+                    
             })
         </script>
 
